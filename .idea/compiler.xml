@@ -26,6 +26,7 @@
       <module name="ShebaHub-Rating" options="-parameters" />
       <module name="ShebaHub-ServiceDescovery" options="-parameters" />
       <module name="ShebaHub-user" options="-parameters" />
+      <module name="Shebahub-REST" options="-parameters" />
       <module name="shebaHub-Post" options="-parameters" />
     </option>
   </component>
