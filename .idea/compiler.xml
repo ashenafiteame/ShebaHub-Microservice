@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ShebaHub-Rating" />
+        <module name="Shebahub-REST" />
         <module name="shebaHub-Post" />
         <module name="ShebaHub-ServiceDescovery" />
         <module name="ShebaHub-user" />
@@ -15,6 +16,7 @@
     <bytecodeTargetLevel>
       <module name="shebaHub-Post" target="17" />
       <module name="ShebaHub-Rating" target="17" />
+      <module name="Shebahub-REST" target="17" />
       <module name="ShebaHub-ServiceDescovery" target="17" />
       <module name="ShebaHub-user" target="17" />
     </bytecodeTargetLevel>
