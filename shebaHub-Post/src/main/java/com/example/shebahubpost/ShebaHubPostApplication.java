@@ -9,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableEurekaClient
 public class ShebaHubPostApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(ShebaHubPostApplication.class, args);
 	}
