@@ -17,17 +17,19 @@ public class Users {
     @Temporal(TemporalType.DATE)
     private Date dob;
 
+    private String password;
+
 
     public Users() {
     }
 
-    public Users(String username, String firstName, String lastName, String email, Date dob) {
+    public Users(String username, String firstName, String lastName, String email, Date dob, String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.dob = dob;
-
+        this.password = password;
     }
 
     public String getUsername() {
@@ -76,5 +78,13 @@ public class Users {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

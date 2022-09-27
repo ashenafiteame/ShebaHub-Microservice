@@ -1,20 +1,34 @@
 
-spring:
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/shebahubUser
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+#spring:
+#  datasource:
+#    username: postgres
+#    password: password
+#    url: jdbc:postgresql://localhost:5432/yemane
+##    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#
+#  application:
+#    name: user-service
+#server:
+#  port: 8084
 
-  application:
-    name: user-service
-server:
-  port: 8084
+
+
+#  server.port=8082
+#  spring.application.name=shebaHub-post-service
+#  spring.datasource.url=jdbc:postgresql://localhost:5432/yemane
+#  spring.datasource.username=postgres
+#  spring.datasource.password=password
+#  spring.jpa.hibernate.ddl-auto=create-drop
+#  spring.jpa.show-sql=true
+#  spring.jpa.propserties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+#  spring.jpa.properties.hibernate.format_sql=true
+#  server.error.include-message=always
+
 
