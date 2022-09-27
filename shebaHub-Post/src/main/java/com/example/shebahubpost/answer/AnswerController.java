@@ -35,5 +35,14 @@ public class AnswerController {
         return answer;
     }
 
+    @PutMapping("/{id}")
+    public void updateAnswer(@PathVariable(value = "id") Long questionId,@RequestBody Answer answer ){
+        answer.setPostId(questionId);
+        answerService.updateAnswer(answer);
+    }
 
+    @DeleteMapping("/{id}")
+    public void deleteAnswer(@PathVariable(value = "id") Long answerId ){
+        answerService.deleteAnswer(answerId);
+    }
 }

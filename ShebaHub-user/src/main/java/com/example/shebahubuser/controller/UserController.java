@@ -18,11 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-<<<<<<< HEAD
-@RequestMapping("/api")
-=======
 @RequestMapping("/api/user")
->>>>>>> Authentication
+
 public class UserController {
     @Autowired
     private UserService userService;
@@ -43,7 +40,7 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public Optional<Users> getUserInfo(@PathVariable("id") Long id) {
-       return userService.getUser(id);
+        return userService.getUser(id);
     }
 
     @GetMapping("/users")
@@ -58,15 +55,15 @@ public class UserController {
     }
 
     @PutMapping("/user")
-    public String  updateUser(@RequestBody Users user) {
+    public String updateUser(@RequestBody Users user) {
         userService.updateUser(user);
-        return "user with username="+user.getUsername()+ "updated successfully";
+        return "user with username=" + user.getUsername() + "updated successfully";
     }
 
     @DeleteMapping("/user/{id}")
-    public String  deleteUser(@PathVariable("id") Long id) {
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "user with id="+id+ "deleted successfully";
+        return "user with id=" + id + "deleted successfully";
     }
 
 
@@ -75,7 +72,8 @@ public class UserController {
      * Authentication
      * ***/
     @PostMapping("/authentication")
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        //public void login(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -84,8 +82,8 @@ public class UserController {
                     )
             );
 
-        }catch (BadCredentialsException e){
-            throw  new Exception("Incorrect username or password",e);
+        } catch (BadCredentialsException e) {
+            throw new Exception("Incorrect username or password", e);
         }
         final UserDetails userDetails = userDetailService.loadUserByUsername(
                 authenticationRequest.getUsername()
@@ -95,7 +93,7 @@ public class UserController {
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         System.out.println(jwt);
 
-        return ResponseEntity.ok(new AuthenticationResponse(user.get() ,jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(user.get(), jwt));
     }
 
 

@@ -12,13 +12,24 @@ public class User {
     private String email;
     private Date dob;
 
-    public User(Long id, String username, String firstName, String lastName, String email, Date dob) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private String password;
+
+    public User(Long id, String username, String firstName, String lastName, String email, Date dob,String password) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.dob = dob;
+        this.password=password;
     }
 
     public User() {

@@ -1,5 +1,6 @@
 package com.example.shebahubrest.controller;
 
+import com.example.shebahubrest.model.request.AuthenticationRequest;
 import com.example.shebahubrest.model.request.CreateAnswerRequest;
 import com.example.shebahubrest.model.request.QuestionCreateRequest;
 import com.example.shebahubrest.model.response.*;
@@ -19,7 +20,7 @@ public class ShebaHubRestController {
     //    TODO get all users
     @GetMapping("/users")
     public User[] getAllUsers(){
-        ResponseEntity<User[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-USER/api/users", User[].class);
+        ResponseEntity<User[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-USER/api/user/users", User[].class);
         User[] users = responseEntity.getBody();
         return users;
     }
@@ -27,8 +28,9 @@ public class ShebaHubRestController {
     // todo post user
     @PostMapping("/user")
     public void addUser(@RequestBody User user){
-        restTemplate.postForObject("http://SHEBAHUB-USER/api/user",user, ResponseEntity.class);
+        restTemplate.postForObject("http://SHEBAHUB-USER/api/user/user",user, ResponseEntity.class);
     }
+
 
     // TODO get specific user
     @GetMapping("/user/{userId}")
@@ -41,25 +43,30 @@ public class ShebaHubRestController {
     @PostMapping("/question")
     public void createQuestion(@RequestBody QuestionCreateRequest questionCreateRequest){
 
-        restTemplate.postForObject("http://SHEBAHUB-POST/api/qustion",questionCreateRequest, ResponseEntity.class);
+        restTemplate.postForObject("http://SHEBAHUB-POST/api/question",questionCreateRequest, ResponseEntity.class);
+    }
+
+    @GetMapping("/question")
+    public Question[] getAllQuestions(){
+        return restTemplate.getForObject("http://SHEBAHUB-POST/api/question", Question[].class);
     }
     //TODO get question by userid
-    @GetMapping("/questions/{userId}")
-    public Question[] getQuestionByUserId(@PathVariable Long userId){
-        ResponseEntity<Question[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-POST/api/qustion"+userId, Question[].class);
-        return responseEntity.getBody();
+    @GetMapping("/question/{id}")
+    public Question getQuestionById(@PathVariable Long id){
+        return restTemplate.getForObject("http://SHEBAHUB-POST/api/question/"+id, Question.class);
+
     }
 
     //TODO add answer to question
     @PostMapping("/answer/{questionId}")
     public void addQuestion(@RequestBody CreateAnswerRequest createAnswerRequest, @PathVariable Long questionId){
-        restTemplate.postForObject("http://SHEBAHUB-POST/api/answer"+questionId,createAnswerRequest, ResponseEntity.class);
+        restTemplate.postForObject("http://SHEBAHUB-POST/api/answer/"+questionId,createAnswerRequest, ResponseEntity.class);
     }
 
     // todo get answer by questionId
     @GetMapping("/answers/{questionId}")
     public Answer[] getAnswerByUserId(@PathVariable Long questionId){
-        ResponseEntity<Answer[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-POST/api/answer"+questionId , Answer[].class);
+        ResponseEntity<Answer[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-POST/api/answer/"+questionId , Answer[].class);
         return responseEntity.getBody();
     }
 
@@ -89,5 +96,8 @@ public class ShebaHubRestController {
         restTemplate.postForObject("http://SHEBAHUB-POST/api/answer"+questionId,rating, ResponseEntity.class);
     }
 
-    
+    @PostMapping("/authentication")
+    public void userAuthentication(@RequestBody AuthenticationRequest authenticationRequest){
+       ResponseEntity<?> authenticationResponseResponseEntity= restTemplate.postForObject("http://SHEBAHUB-USER/api/user/authentication", authenticationRequest, ResponseEntity.class);
+    }
 }

@@ -17,6 +17,14 @@ public class AnswerService {
     public void addAnswer(Answer answer){
         answerRepository.save(answer);
     }
+
+    public void updateAnswer(Answer answer){
+        answerRepository.save(answer);
+    }
+
+    public void deleteAnswer(Long answerId){
+        answerRepository.deleteById(answerId);
+    }
     public List<Answer> findByQuestionID(Question question){
         return answerRepository.findAnswerByQuestion(question);
     }

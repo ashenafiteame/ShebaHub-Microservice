@@ -14,7 +14,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
   application:
-    name: user-service
+    name: SHEBAHUB-POST
 server:
   port: 8082
 
