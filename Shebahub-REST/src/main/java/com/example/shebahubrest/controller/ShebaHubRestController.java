@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+
 @RestController
 @RequestMapping("/shebahub/api")
 public class ShebaHubRestController {
@@ -15,28 +16,11 @@ public class ShebaHubRestController {
     @Autowired
     RestTemplate restTemplate;
 
-//    @GetMapping("/{}")
-
-    /**
-     * GET ALL USER
-     * CREATE USER
-     * DELETE USER
-     *
-     * create POST - QUESTION
-     * CREATE POST - ANSWER
-     * DELETE ANSWER
-     *
-     * RATE QUESTION
-     * RATE ANSWER
-     *
-     *
-     * */
-
-
     //    TODO get all users
     @GetMapping("/users")
-    public UserList getAllUsers(){
-        UserList  users = restTemplate.getForObject("http://SHEBAHUB-USER/api/users", UserList.class);
+    public User[] getAllUsers(){
+        ResponseEntity<User[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-USER/api/users", User[].class);
+        User[] users = responseEntity.getBody();
         return users;
     }
 
@@ -56,69 +40,54 @@ public class ShebaHubRestController {
     //todo createQustion
     @PostMapping("/question")
     public void createQuestion(@RequestBody QuestionCreateRequest questionCreateRequest){
+
         restTemplate.postForObject("http://SHEBAHUB-POST/api/qustion",questionCreateRequest, ResponseEntity.class);
     }
     //TODO get question by userid
     @GetMapping("/questions/{userId}")
-    public QuestionList getQuestionByUserId(@PathVariable Long userId){
-        QuestionList questions = restTemplate.getForObject("http://SHEBAHUB-POST/api/qustion"+userId , QuestionList.class);
-        return questions;
+    public Question[] getQuestionByUserId(@PathVariable Long userId){
+        ResponseEntity<Question[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-POST/api/qustion"+userId, Question[].class);
+        return responseEntity.getBody();
     }
 
     //TODO add answer to question
-    @PostMapping("/question")
-    public void addQuestion(@RequestBody CreateAnswerRequest createAnswerRequest){
-        restTemplate.postForObject("http://SHEBAHUB-POST/api/qustion",createAnswerRequest, ResponseEntity.class);
+    @PostMapping("/answer/{questionId}")
+    public void addQuestion(@RequestBody CreateAnswerRequest createAnswerRequest, @PathVariable Long questionId){
+        restTemplate.postForObject("http://SHEBAHUB-POST/api/answer"+questionId,createAnswerRequest, ResponseEntity.class);
     }
 
     // todo get answer by questionId
     @GetMapping("/answers/{questionId}")
-    public AnswerList getAnswerByUserId(@PathVariable Long questionId){
-        AnswerList answers = restTemplate.getForObject("http://SHEBAHUB-POST/api/answer"+questionId , AnswerList.class);
-        return answers;
+    public Answer[] getAnswerByUserId(@PathVariable Long questionId){
+        ResponseEntity<Answer[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-POST/api/answer"+questionId , Answer[].class);
+        return responseEntity.getBody();
     }
 
     //todo get Ratting by user id
 
     @GetMapping("/rating/{userId}")
-    public RattingList getUsersRating(@PathVariable Long userId){
-        RattingList ratings = restTemplate.getForObject("http://SHEBAHUB-RATTING/api/answer"+userId , RattingList.class);
-        return ratings;
+    public Rating[] getUsersRating(@PathVariable Long userId){
+        ResponseEntity<Rating[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-RATTING/api/answer"+userId , Rating[].class);
+        return responseEntity.getBody();
     }
     //todo get Ratting by question id
     @GetMapping("/rating/{questionId}")
-    public int getQuestionsRating( @PathVariable Long questionId){
-        int ratings = restTemplate.getForObject("http://SHEBAHUB-RATTING/api/answer"+questionId , Integer.class);
-        return ratings;
+    public Rating[] getQuestionsRating( @PathVariable Long questionId){
+        ResponseEntity<Rating[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-RATTING/api/question"+questionId , Rating[].class);
+        return responseEntity.getBody();
     }
     //todo get Ratting by answer id
     @GetMapping("/rating/{answerId}")
-    public int getAnswersRating(@PathVariable Long answerId){
-        int ratings = restTemplate.getForObject("http://SHEBAHUB-RATTING/api/answer"+answerId , Integer.class);
-        return ratings;
+    public Rating[] getAnswersRating(@PathVariable Long answerId){
+        ResponseEntity<Rating[]> responseEntity = restTemplate.getForEntity("http://SHEBAHUB-RATTING/api/answer"+answerId , Rating[].class);
+        return responseEntity.getBody();
     }
 
-    //todo post stuff
+    //todo post Ratting by user
+    @PostMapping("/rating")
+    public void addRating(@RequestBody Rating rating, @PathVariable Long questionId){
+        restTemplate.postForObject("http://SHEBAHUB-POST/api/answer"+questionId,rating, ResponseEntity.class);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-    //        List<User>  users = restTemplate.getForObject("http://SHEBAHUB-POST")
-    //        List<User>  users = restTemplate.getForObject("http://SHEBAHUB-RATTING")
-
-
-//    public List<User> getAllUsers(@PathVariable("userId") )
-
-
-
-
-
+    
 }
