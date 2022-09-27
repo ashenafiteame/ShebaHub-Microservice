@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -18,29 +18,29 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getuser/{id}")
+    @GetMapping("/user/{id}")
     public Optional<Users> getUserInfo(@PathVariable("id") Long id) {
        return userService.getUser(id);
     }
 
-    @GetMapping("/getusers")
+    @GetMapping("/users")
     public List<Users> getUsers() {
         return userService.getUsers();
     }
 
 
-    @PostMapping("/createuser")
+    @PostMapping("/user")
     public void addUser(@RequestBody Users user) {
         userService.registerUser(user);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/user")
     public String  updateUser(@RequestBody Users user) {
         userService.updateUser(user);
         return "user with username="+user.getUsername()+ "updated successfully";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/user/{id}")
     public String  deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "user with id="+id+ "deleted successfully";

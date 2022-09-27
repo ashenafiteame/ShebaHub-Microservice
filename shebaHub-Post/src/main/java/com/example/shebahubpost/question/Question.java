@@ -10,8 +10,6 @@ import java.util.List;
 
 @Entity
 public class Question  extends Post {
-
-
     @OneToMany(
             mappedBy = "question",
             orphanRemoval = true,

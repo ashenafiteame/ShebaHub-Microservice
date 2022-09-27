@@ -13,6 +13,10 @@ public class VoteService {
     @Autowired
     private VoteRepository voteRepository;
 
+    public VoteService(VoteRepository voteRepository) {
+        this.voteRepository=voteRepository;
+    }
+
     public void createVote(Vote vote) {
         voteRepository.save(vote);
     }

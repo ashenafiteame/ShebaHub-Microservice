@@ -17,8 +17,7 @@ public class Vote {
     public Vote() {
     }
 
-    public Vote(Long id, Long postId, Long userId) {
-        this.id = id;
+    public Vote(Long postId, Long userId) {
         this.postId = postId;
         this.userId = userId;
     }
