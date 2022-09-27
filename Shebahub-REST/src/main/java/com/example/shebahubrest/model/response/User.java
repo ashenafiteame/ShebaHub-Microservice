@@ -1,51 +1,27 @@
-package com.example.shebahubuser.model;
+package com.example.shebahubrest.model.response;
 
-import javax.persistence.*;
+
 import java.util.Date;
 
-@Entity
-public class Users {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class User {
     private Long id;
 
     private String username;
     private String firstName;
     private String lastName;
     private String email;
-    @Temporal(TemporalType.DATE)
     private Date dob;
 
-    private String password;
-
-
-    public Users() {
-    }
-
-    public Users(String username, String firstName, String lastName, String email, Date dob, String password) {
+    public User(Long id, String username, String firstName, String lastName, String email, Date dob) {
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.dob = dob;
-        this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public User() {
     }
 
     public Long getId() {
@@ -54,6 +30,14 @@ public class Users {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -80,11 +64,23 @@ public class Users {
         this.email = email;
     }
 
-    public String getPassword() {
-        return this.password;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", dob=" + dob +
+                '}';
     }
 }
